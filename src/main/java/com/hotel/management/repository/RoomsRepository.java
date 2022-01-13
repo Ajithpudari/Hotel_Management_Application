@@ -42,11 +42,13 @@ public class RoomsRepository implements IRoomsRepository {
         return rooms;
     }
 
-
-
-
-
-
+   /* @Override
+    public List<Rooms> getRoomsByDate(String date) {
+        String query = "select * from new_table where date =?";
+        List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
+                result.getString("date"), result.getInt("roomNo"),result.getString("availability")));
+        return template.queryForList(query,Rooms.class,rooms);
+    }*/
 
     //delete item from database
     /*public int deleteItem(long id){
