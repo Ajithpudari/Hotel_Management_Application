@@ -5,6 +5,7 @@ import com.hotel.management.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -14,7 +15,7 @@ public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
 
-   /* @GetMapping("/Registration")
+   /*   @GetMapping("/Registration")
     public ResponseEntity<List<Registration>> getAllTutorials(@RequestParam(required = false) String registration) {
         try {
             List<Registration> tutorials = new ArrayList<Registration>();
@@ -55,9 +56,21 @@ public class RegistrationController {
             return registrationService.delete(id, userId);
 
         }
-
-
     }
-}
+
+    @GetMapping("/allUser")
+    //public ResponseEntity<List<Registration>> getAllusers(@RequestParam() String registration);
+    List <Registration> getallUser( String registration) {
+        return registrationService.allUsers();
+    }
+
+   @PutMapping("/updateUser/{id}")
+        String updateUserById(@PathVariable("id") int id){
+
+            return registrationService.updateUserById(id);
+        }
+
+   }
+
 
 
