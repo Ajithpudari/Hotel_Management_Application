@@ -8,34 +8,18 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoomsRepository {
+public class RoomsRepository implements IRoomsRepository {
 
     @Autowired
     JdbcTemplate template;
 
-    /*Getting all Items from table*/
-    /*public List<Rooms> getAllItems() {
-        List<Rooms> rooms = template.query("select id,")
-                template.query("select id, ,category from item", (result, rowNum) -> new Rooms(result.getInt("id"),
-                result.getString("name"), result.getString("category")));
-        return items;
-    }*/
-
-    //get one item
-    /*public Rooms getItem(int itemId) {
-        String query = "SELECT * FROM item WHERE ID=?";
-        Rooms item = template.queryForObject(query, new Object[]{itemId}, new
-                BeanPropertyRowMapper<>(Rooms.class));
-
-        return item;
-    }*/
-
-    //add room to database
+    @Override
     public int addRoom(int id,String date,int roomNO,String availability) {
         String query = "INSERT INTO new_table VALUES(?,?,?,?)";
         return template.update(query, id,date, roomNO, availability);
     }
 
+    @Override
     public void updateRoom(int id, String date, int roomNo, String availability) {
         String query= "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
         template.update(query, date,roomNo,availability,id);
@@ -43,11 +27,21 @@ public class RoomsRepository {
         return;
     }
 
+    @Override
     public int deleteRoom(int id){
         String query = "delete from new_table where id =?";
         System.out.println("Deleted Room :" +" "+id);
         return template.update(query,id);
     }
+
+    @Override
+    public List<Rooms> getAllRooms()
+    {
+        List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
+                result.getString("date"), result.getInt("roomNo"),result.getString("availability")));
+        return rooms;
+    }
+
 
 
 
