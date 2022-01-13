@@ -50,5 +50,11 @@ public class HotelRoomsController{
         return roomsRepository.getAllRooms();
     }
 
+   /* @RequestMapping("user/getRoomsByDate/")
+    @ResponseBody
+    public List<Rooms> getRoomsByDate(@RequestParam("date") String date){
+        return roomsRepository.getRoomsByDate(date);
+    }*/
+
 
 }

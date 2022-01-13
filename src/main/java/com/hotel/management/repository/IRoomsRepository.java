@@ -18,5 +18,8 @@ public interface IRoomsRepository {
     //get all rooms in database
     public List<Rooms> getAllRooms();
 
+    //get rooms by date
+    //public List<Rooms> getRoomsByDate(String date);
+
 
 }
