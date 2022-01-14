@@ -57,15 +57,13 @@ public class RegistrationController {
         }
     }
 
-    @GetMapping("/allUser")
-        //public ResponseEntity<List<Registration>> getAllusers(@RequestParam() String registration);
+    @GetMapping("/alluser")
     List<Registration> getallUser(String registration) {
         return registrationService.allUsers();
     }
 
-    @PutMapping("/updateUser/{id}")
+    @PutMapping("/updateuser/{id}")
     String updateUserById(@PathVariable("id") int id) {
-
         return registrationService.updateUserById(id);
     }
 

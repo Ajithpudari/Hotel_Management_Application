@@ -15,13 +15,13 @@ public class RoomsRepository implements IRoomsRepository {
 
     @Override
     public int addRoom(int id, String date, int roomNO, String availability) {
-        String query = "INSERT INTO new_table VALUES(?,?,?,?)";
+        String query = "INSERT INTO rooms VALUES(?,?,?,?)";
         return template.update(query, id, date, roomNO, availability);
     }
 
     @Override
     public void updateRoom(int id, String date, int roomNo, String availability) {
-        String query = "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
+        String query = "update rooms set date = ?,roomNo = ?,availability = ? where id = ?";
         template.update(query, date, roomNo, availability, id);
         System.out.println("Updated Room : " + " " + roomNo);
         return;
@@ -29,22 +29,22 @@ public class RoomsRepository implements IRoomsRepository {
 
     @Override
     public int deleteRoom(int id) {
-        String query = "delete from new_table where id =?";
+        String query = "delete from rooms where id =?";
         System.out.println("Deleted Room :" + " " + id);
         return template.update(query, id);
     }
 
     @Override
     public List<Rooms> getAllRooms() {
-        List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
+        List<Rooms> rooms = template.query("select id, date,roomNo,availability from rooms", (result, rowNum) -> new Rooms(result.getInt("id"),
                 result.getString("date"), result.getInt("roomNo"), result.getString("availability")));
         return rooms;
     }
 
    /* @Override
     public List<Rooms> getRoomsByDate(String date) {
-        String query = "select * from new_table where date =?";
-        List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
+        String query = "select * from rooms where date =?";
+        List<Rooms> rooms = template.query("select id, date,roomNo,availability from rooms", (result, rowNum) -> new Rooms(result.getInt("id"),
                 result.getString("date"), result.getInt("roomNo"),result.getString("availability")));
         return template.queryForList(query,Rooms.class,rooms);
     }*/
