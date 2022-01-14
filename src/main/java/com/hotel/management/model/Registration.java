@@ -5,8 +5,7 @@ public class Registration {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    //private String userName;
-    //private String password;
+
     private String role;
 
     public Registration() {
@@ -17,8 +16,6 @@ public class Registration {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        //this.userName = userName;
-        //this.password = password;
         this.role = role;
     }
 
@@ -53,22 +50,6 @@ public class Registration {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-//
-// public String getUserName() {
-//  return userName;
-// }
-//
-// public void setUserName(String userName) {
-//  this.userName = userName;
-// }
-
-/* public String getPassword() {
-  return password;
- }
-
- public void setPassword(String password) {
-  this.password = password;
- }*/
 
     public String getRole() {
         return role;
