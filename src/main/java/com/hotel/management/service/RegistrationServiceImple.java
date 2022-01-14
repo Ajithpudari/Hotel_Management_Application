@@ -1,7 +1,7 @@
 package com.hotel.management.service;
 
 import com.hotel.management.model.Registration;
-import com.hotel.management.repository.IRegistrationRepo;
+import com.hotel.management.repository.IRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 public class RegistrationServiceImple implements RegistrationService {
 
     @Autowired
-    IRegistrationRepo registrationRepo;
+    IRegistrationRepository registrationRepo;
 
     @Override
     public int registration(Registration registration) {

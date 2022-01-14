@@ -6,20 +6,23 @@ import java.util.List;
 
 public interface IRoomsRepository {
 
-    //add room to database
-    public int addRoom(int id,String date,int roomNO,String availability);
+
 
     //update room in database
-    public void updateRoom(int id, String date, int roomNo, String availability);
+    void updateRoom(Integer id, String date, int roomNo, String availability);
 
-    //delete room in database
-    public int deleteRoom(int id);
+
 
     //get all rooms in database
-    public List<Rooms> getAllRooms();
+     List<Rooms> getAllRooms();
 
-    //get rooms by date
-    //public List<Rooms> getRoomsByDate(String date);
+     String deleteRoomDetails(int id,int accessId);
+
+     String updateRoomDetails(int id ,int accessId);
+
+
+
+
 
 
 }

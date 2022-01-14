@@ -8,10 +8,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RegistrationRepository implements IRegistrationRepo {
+public class RegistrationRepository implements IRegistrationRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
 
     @Override
     public int registration(Registration registration) {
