@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/app")
@@ -59,18 +58,18 @@ public class RegistrationController {
     }
 
     @GetMapping("/allUser")
-    //public ResponseEntity<List<Registration>> getAllusers(@RequestParam() String registration);
-    List <Registration> getallUser( String registration) {
+        //public ResponseEntity<List<Registration>> getAllusers(@RequestParam() String registration);
+    List<Registration> getallUser(String registration) {
         return registrationService.allUsers();
     }
 
-   @PutMapping("/updateUser/{id}")
-        String updateUserById(@PathVariable("id") int id){
+    @PutMapping("/updateUser/{id}")
+    String updateUserById(@PathVariable("id") int id) {
 
-            return registrationService.updateUserById(id);
-        }
+        return registrationService.updateUserById(id);
+    }
 
-   }
+}
 
 
 

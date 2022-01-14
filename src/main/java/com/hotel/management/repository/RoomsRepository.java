@@ -1,7 +1,7 @@
 package com.hotel.management.repository;
+
 import com.hotel.management.model.Rooms;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,31 +14,30 @@ public class RoomsRepository implements IRoomsRepository {
     JdbcTemplate template;
 
     @Override
-    public int addRoom(int id,String date,int roomNO,String availability) {
+    public int addRoom(int id, String date, int roomNO, String availability) {
         String query = "INSERT INTO new_table VALUES(?,?,?,?)";
-        return template.update(query, id,date, roomNO, availability);
+        return template.update(query, id, date, roomNO, availability);
     }
 
     @Override
     public void updateRoom(int id, String date, int roomNo, String availability) {
-        String query= "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
-        template.update(query, date,roomNo,availability,id);
-        System.out.println("Updated Room : " +" " +roomNo );
+        String query = "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
+        template.update(query, date, roomNo, availability, id);
+        System.out.println("Updated Room : " + " " + roomNo);
         return;
     }
 
     @Override
-    public int deleteRoom(int id){
+    public int deleteRoom(int id) {
         String query = "delete from new_table where id =?";
-        System.out.println("Deleted Room :" +" "+id);
-        return template.update(query,id);
+        System.out.println("Deleted Room :" + " " + id);
+        return template.update(query, id);
     }
 
     @Override
-    public List<Rooms> getAllRooms()
-    {
+    public List<Rooms> getAllRooms() {
         List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
-                result.getString("date"), result.getInt("roomNo"),result.getString("availability")));
+                result.getString("date"), result.getInt("roomNo"), result.getString("availability")));
         return rooms;
     }
 
@@ -63,9 +62,6 @@ public class RoomsRepository implements IRoomsRepository {
         System.out.println("Updated Record with ID = " + id );
         return;
     }*/
-
-
-
 
 
 }

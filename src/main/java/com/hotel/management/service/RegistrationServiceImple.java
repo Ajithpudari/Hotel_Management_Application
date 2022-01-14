@@ -2,12 +2,8 @@ package com.hotel.management.service;
 
 import com.hotel.management.model.Registration;
 import com.hotel.management.repository.IRegistrationRepository;
-import com.hotel.management.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +40,7 @@ public class RegistrationServiceImple implements RegistrationService {
 
     @Override
     public List<Registration> allUsers() {
-        List <Registration> reg= registrationRepo.allUsers();
+        List<Registration> reg = registrationRepo.allUsers();
         return reg;
     }
 

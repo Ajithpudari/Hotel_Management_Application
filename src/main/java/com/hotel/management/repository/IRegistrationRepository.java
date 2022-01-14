@@ -13,12 +13,15 @@ public List<Registration> findByRole(String  role);
 public int deleteAll();*/
 
 
-
 public interface IRegistrationRepository {
     int registration(Registration registration);
+
     Registration getOne(int id);
+
     String delete(int id);
+
     List<Registration> allUsers();
+
     int updatebyId(Registration registration);
 
 }
