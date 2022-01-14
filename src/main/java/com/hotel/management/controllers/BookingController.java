@@ -1,9 +1,12 @@
 package com.hotel.management.controllers;
 
+import com.hotel.management.model.AppResponse;
 import com.hotel.management.model.Rooms;
 import com.hotel.management.repository.BookingRepository;
 import com.hotel.management.repository.RoomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +26,8 @@ public class BookingController {
     }
 
     @GetMapping("/user/getallrooms")
-    public List<Rooms> getAllRooms() {
-        return roomsRepo.getAllRooms();
+    public ResponseEntity<Object> getAllRooms() {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), roomsRepo.getAllRooms()),HttpStatus.OK);
     }
 }
 

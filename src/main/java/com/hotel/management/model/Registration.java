@@ -5,7 +5,6 @@ public class Registration {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-
     private String role;
 
     public Registration() {
