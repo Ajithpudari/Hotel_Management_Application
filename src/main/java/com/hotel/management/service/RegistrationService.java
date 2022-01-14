@@ -2,11 +2,18 @@ package com.hotel.management.service;
 
 import com.hotel.management.model.Registration;
 
+import java.util.List;
+
 public interface RegistrationService {
 
-     int registration(Registration registration);
+    String registration(Registration registration);
 
-     Registration getOne(int id);
+    Registration getOne(int id);
 
-     String delete(int id, int userId);
+    String delete(int id, int userId);
+
+    List<Registration> allUsers(int id);
+
+    String updateUserById(int id, Registration registration);
+
 }

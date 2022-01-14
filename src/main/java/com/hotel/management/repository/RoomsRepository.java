@@ -21,6 +21,11 @@ public class RoomsRepository implements IRoomsRepository {
 
 
 
+    public int addRoom(Rooms rooms) {
+        String query = "INSERT INTO new_table VALUES(?,?,?,?)";
+        return template.update(query, rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
+    }
+
     @Override
     public void updateRoom(Integer id, String date, int roomNo, String availability) {
         String query= "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
@@ -29,7 +34,12 @@ public class RoomsRepository implements IRoomsRepository {
         return;
     }
 
-
+    @Override
+    public int deleteRoom(int id){
+        String query = "delete from new_table where id =?";
+        System.out.println("Deleted Room :" +" "+id);
+        return template.update(query,id);
+    }
 
     @Override
     public List<Rooms> getAllRooms()
@@ -96,9 +106,3 @@ public class RoomsRepository implements IRoomsRepository {
         } else {
             return "you are not authorised";
         }*/
-/* @Override
-    public int deleteRoom(int id){
-        String query = "delete from new_table where id =?";
-        System.out.println("Deleted Room :" +" "+id);
-        return template.update(query,id);
-    }*/

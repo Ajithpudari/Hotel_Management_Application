@@ -9,20 +9,22 @@ public interface IRoomsRepository {
 
 
     //update room in database
+
+
     void updateRoom(Integer id, String date, int roomNo, String availability);
 
-
+    //delete room in database
+     int deleteRoom(int id);
 
     //get all rooms in database
      List<Rooms> getAllRooms();
 
-     String deleteRoomDetails(int id,int accessId);
-
-     String updateRoomDetails(int id ,int accessId);
 
 
+     int addRoom(Rooms rooms) ;
 
 
+    String deleteRoomDetails(int id, int accessId);
 
-
+    String updateRoomDetails(int id, int accessId);
 }

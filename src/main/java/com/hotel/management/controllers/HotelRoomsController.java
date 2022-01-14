@@ -9,30 +9,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Hotel")
+@RequestMapping("/hotel")
 public class HotelRoomsController{
 
 
     @Autowired
     IRoomsRepository roomsRepository;
+    RoomsRepository itemRepo;
 
     //Gives list of all Rooms
-    @GetMapping("/GetAllRoomDetails")
+    @GetMapping("/get_all/room_details")
     public List<Rooms> getAllRooms(){
         return roomsRepository.getAllRooms();
     }
 
     //only Admin can update room details
-    @PutMapping("/Admin/UpdateRoomDetails")
+    @PutMapping("/admin/update/room_details")
     public String updateRoom(@RequestParam("id") int id,String date,int roomNo,String availability)
     {
         roomsRepository.updateRoom(id,date,roomNo,availability);
         return "roomNo"+" "+roomNo +" "+"is updated";
     }
 
-    //Only Manager can disable a room from usage
-    @DeleteMapping("/Manager/DisableRoomUsage")
-    public String disableRoomUsage(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
+    //Only Manager can disable
+    @DeleteMapping("manager/disable/room_details")
+    public String delete(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
        return roomsRepository.deleteRoomDetails(id,accessId);
     }
 

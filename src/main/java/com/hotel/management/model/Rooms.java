@@ -22,12 +22,6 @@ public class Rooms {
         this.availability = availability;
     }
 
-    public Rooms(String date, int roomNo, String availability) {
-        this.date = date;
-        this.roomNo = roomNo;
-        this.availability = availability;
-    }
-
     public long getId() {
         return id;
     }
