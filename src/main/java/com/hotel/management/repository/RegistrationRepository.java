@@ -1,49 +1,61 @@
 package com.hotel.management.repository;
 
+import com.hotel.management.constants.Constants;
 import com.hotel.management.model.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class RegistrationRepository implements IRegistrationRepo {
+public class RegistrationRepository implements IRegistrationRepository {
+
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
     public int registration(Registration registration) {
-        String query = "INSERT INTO registration VALUES(?,?,?,?,?)";
-        try{
-        return jdbcTemplate.update(query, registration.getId(),registration.getFirstName(),registration.getLastName(),
-                registration.getPhoneNumber(),
-                registration.getRole());
-
-        }catch (Exception e){
+        String query = Constants.CREATE_REG;
+        try {
+            return jdbcTemplate.update(query, registration.getId(), registration.getFirstName(), registration.getLastName(), registration.getPhoneNumber(), registration.getRole());
+        } catch (Exception e) {
             return 0;
         }
     }
 
     @Override
     public Registration getOne(int id) {
-        String query = "SELECT * FROM registration WHERE ID=?";
+        String query = Constants.SELECT_REG;
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{id}, new
                     BeanPropertyRowMapper<>(Registration.class));
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
     @Override
     public String delete(int id) {
-        String query="DELETE FROM registration WHERE id=?";
-        int deleted=jdbcTemplate.update(query,id);
-        if (deleted==1)
-            return "success";
-        return "Failure";
-
+        String query = Constants.DELETE_REG;
+        int deleted = jdbcTemplate.update(query, id);
+        return deleted == 1 ? "success" : "Failure";
     }
+
+    @Override
+    public List<Registration> allUsers() {
+        {
+            return jdbcTemplate.query(Constants.SELECT_REG_BY_ROLE, (result, rowNum) -> new Registration(result.getInt("id"),
+                    result.getString("firstName"), result.getString("lastName"), result.getString("phoneNumber"), result.getString("role")));
+        }
+    }
+
+    @Override
+    public int updatebyId(Registration registration) {
+        return jdbcTemplate.update(Constants.UPDATE_REG,
+                registration.getFirstName(), registration.getLastName(), registration.getPhoneNumber(), registration.getId());
+    }
+
 }

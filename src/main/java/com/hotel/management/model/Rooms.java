@@ -1,11 +1,5 @@
 package com.hotel.management.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-
-
 public class Rooms {
 
     private int id;
@@ -15,6 +9,7 @@ public class Rooms {
 
     public Rooms() {
     }
+
     public Rooms(int id, String date, int roomNo, String availability) {
         this.id = id;
         this.date = date;

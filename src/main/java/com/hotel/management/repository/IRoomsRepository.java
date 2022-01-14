@@ -7,7 +7,7 @@ import java.util.List;
 public interface IRoomsRepository {
 
     //add room to database
-    public int addRoom(int id,String date,int roomNO,String availability);
+    public int addRoom(int id, String date, int roomNO, String availability);
 
     //update room in database
     public void updateRoom(int id, String date, int roomNo, String availability);

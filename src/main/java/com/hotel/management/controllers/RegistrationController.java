@@ -1,63 +1,48 @@
 package com.hotel.management.controllers;
 
+import com.hotel.management.model.AppResponse;
 import com.hotel.management.model.Registration;
 import com.hotel.management.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Objects;
+import java.util.List;
 
 @RestController
-@RequestMapping("/app")
 public class RegistrationController {
 
     @Autowired
     RegistrationService registrationService;
 
-   /* @GetMapping("/Registration")
-    public ResponseEntity<List<Registration>> getAllTutorials(@RequestParam(required = false) String registration) {
-        try {
-            List<Registration> tutorials = new ArrayList<Registration>();
-
-            if (registration == null)
-                .getall().forEach(tutorials::add);
-            else
-                RegistrationServiceImpl.findByTitleContaining(title).forEach(tutorials::add);
-
-            if (tutorials.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new (, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
-
     @PostMapping("/register")
-    public String register(@RequestBody Registration registration) {
-
-        Registration registration1 = registrationService.getOne(registration.getId());
-        if (registration1 == null) {
-            int registrationId = registrationService.registration(registration);
-            if (registrationId == 1) {
-                return "Registered Successfully....";
-            } else
-                return "Failure...Internal Server Error";
-        } else
-            return "User already registered";
+    public ResponseEntity<Object> register(@RequestBody Registration registration) {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), registrationService.registration(registration)), HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id, @RequestParam int userId) {
-        {
-            return registrationService.delete(id, userId);
-
-        }
-
-
+    @GetMapping("/getoneuser/{id}")
+    public ResponseEntity<Object> getOne(@PathVariable("id") int id) {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), registrationService.getOne(id)), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") int id, @RequestParam int userId) {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(),  registrationService.delete(id, userId)), HttpStatus.OK);
+    }
+
+    @GetMapping("/userlist/{id}")
+    public ResponseEntity<Object> getallUser(@PathVariable("id") int id) {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(),  registrationService.allUsers(id)), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateuser/{id}")
+    public ResponseEntity<Object> updateUserById(@PathVariable("id") int id, @RequestBody Registration registration) {
+        return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(),  registrationService.updateUserById(id, registration)), HttpStatus.OK);
+    }
+
 }
+
 
 
