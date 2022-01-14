@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class RegistrationServiceImple implements RegistrationService {
+public class RegistrationServiceImpl implements RegistrationService {
 
     @Autowired
     IRegistrationRepository registrationRepo;
@@ -20,11 +20,13 @@ public class RegistrationServiceImple implements RegistrationService {
         if (registration1 == null) {
             int registrationId = registrationRepo.registration(registration);
             if (registrationId == 1) {
-                return "Registered Successfully, You userId = " + registration.getId();
-            } else{
-                return "Not Registered";}
-        } else{
-            return "User already registered";}
+                return ("Registered Successfully, You userId = " + registration.getId());
+            } else {
+                return "Not Registered";
+            }
+        } else {
+            return "User already registered";
+        }
     }
 
     @Override
@@ -48,25 +50,17 @@ public class RegistrationServiceImple implements RegistrationService {
     @Override
     public List<Registration> allUsers(int id) {
         Registration registration = registrationRepo.getOne(id);
-        if (Objects.equals(registration.getRole(), "admin") || Objects.equals(registration.getRole(), "manager")){
+        if (Objects.equals(registration.getRole(), "admin") || Objects.equals(registration.getRole(), "manager")) {
             return registrationRepo.allUsers();
-        }else{
-        return null;}
+        } else return null;
     }
 
     @Override
     public String updateUserById(int id, Registration registration) {
-        Registration registration1 = registrationRepo.getOne(id);
-        if (registration1 != null) {
-            registration1.setFirstName(registration.getFirstName());
-            registration1.setLastName(registration.getLastName());
-            registration1.setPhoneNumber(registration.getPhoneNumber());
-            int i = registrationRepo.updatebyId(registration1);
-            if (i == 1) {
-                return "user was updated successfully.";
-            } else {
-                return "User not updated";
-            }
+        Registration adminDetails = registrationRepo.getOne(id);
+        if (adminDetails != null && adminDetails.getRole().equals("admin")) {
+            int i = registrationRepo.updatebyId(registration);
+            return i == 1 ? "user was updated successfully." : "User not updated";
         } else
             return "Cannot find user with id=" + id;
     }

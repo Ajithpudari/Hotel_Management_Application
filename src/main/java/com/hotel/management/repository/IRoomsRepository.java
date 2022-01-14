@@ -6,7 +6,12 @@ import java.util.List;
 
 public interface IRoomsRepository {
 
+<<<<<<< HEAD
 
+=======
+    //add room to database
+    public int addRoom(int id, String date, int roomNO, String availability);
+>>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 
     //update room in database
 

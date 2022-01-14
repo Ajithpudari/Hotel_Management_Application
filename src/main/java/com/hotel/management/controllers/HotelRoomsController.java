@@ -8,18 +8,43 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("/hotel")
 public class HotelRoomsController{
+=======
+public class HotelRoomsController {
+>>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 
 
     @Autowired
     IRoomsRepository roomsRepository;
+<<<<<<< HEAD
     RoomsRepository itemRepo;
 
     //Gives list of all Rooms
     @GetMapping("/get_all/room_details")
     public List<Rooms> getAllRooms(){
+=======
+
+    @PutMapping("/admin/updateroom")
+    public String updateRoom(@RequestParam("id") int id, String date, int roomNo, String availability) {
+        roomsRepository.updateRoom(id, date, roomNo, availability);
+        return roomNo + " " + "is updated";
+    }
+
+    @DeleteMapping("/admin/deleteroom")
+    public String deleteRoom(@RequestParam("id") int id) {
+        if (roomsRepository.deleteRoom(id) >= 1) {
+            return "Room Deleted Successfully";
+        } else {
+            return "Something went wrong !";
+        }
+    }
+
+    @GetMapping("getallrooms")
+    public List<Rooms> getAllRooms() {
+>>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
         return roomsRepository.getAllRooms();
     }
 
@@ -43,6 +68,7 @@ public class HotelRoomsController{
     }*/
 
 
+<<<<<<< HEAD
 
 
 
@@ -50,6 +76,8 @@ public class HotelRoomsController{
     public  String update(@RequestParam("id") int id,@RequestParam ("accessId") int accessId),{
 
     }*/
+=======
+>>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 }
 /* @PostMapping("/admin/addRoom")
 public String addRoom(@RequestParam("id") int id,@RequestParam("date") String date,

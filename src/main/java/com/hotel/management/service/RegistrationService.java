@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface RegistrationService {
 
+
     String registration(Registration registration);
 
     Registration getOne(int id);
