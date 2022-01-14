@@ -1,7 +1,6 @@
 package com.hotel.management.repository;
 
 import com.hotel.management.model.Registration;
-import com.hotel.management.model.Rooms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +15,7 @@ public class RegistrationRepository implements IRegistrationRepository {
     JdbcTemplate jdbcTemplate;
 
 
-    //registraion
+    //registration
     @Override
     public int registration(Registration registration) {
         String query = "INSERT INTO registration VALUES(?,?,?,?,?)";
@@ -34,8 +33,8 @@ public class RegistrationRepository implements IRegistrationRepository {
     public Registration getOne(int id) {
         String query = "SELECT * FROM registration WHERE ID=?";
         try {
-            return jdbcTemplate.queryForObject(query, new Object[]{id}, new
-                    BeanPropertyRowMapper<>(Registration.class));
+            return jdbcTemplate.queryForObject(query, new Object[]{id},
+                    new BeanPropertyRowMapper<>(Registration.class));
         }catch (Exception e){
             return null;
         }
@@ -45,9 +44,10 @@ public class RegistrationRepository implements IRegistrationRepository {
     public String delete(int id) {
         String query="DELETE FROM registration WHERE id=?";
         int deleted=jdbcTemplate.update(query,id);
-        if (deleted==1)
-            return "success";
-        return "Failure";
+        if (deleted==1){
+            return "success";}
+        else{
+        return "Failure";}
 
     }
     // get list of users
