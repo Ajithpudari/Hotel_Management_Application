@@ -14,57 +14,31 @@ public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
 
-   /*   @GetMapping("/Registration")
-    public ResponseEntity<List<Registration>> getAllTutorials(@RequestParam(required = false) String registration) {
-        try {
-            List<Registration> tutorials = new ArrayList<Registration>();
-
-            if (registration == null)
-                .getall().forEach(tutorials::add);
-            else
-                RegistrationServiceImpl.findByTitleContaining(title).forEach(tutorials::add);
-
-            if (tutorials.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-
-            return new (, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
-
     @PostMapping("/register")
     public String register(@RequestBody Registration registration) {
+        return registrationService.registration(registration);
+    }
 
-        Registration registration1 = registrationService.getOne(registration.getId());
-        if (registration1 == null) {
-            int registrationId = registrationService.registration(registration);
-            if (registrationId == 1) {
-                return "Registered Successfully....";
-            } else
-                return "Failure...Internal Server Error";
-        } else
-            return "User already registered";
-
+    @GetMapping("/getoneuser/{id}")
+    Registration getOne(@PathVariable("id") int id) {
+        return registrationService.getOne(id);
     }
 
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id, @RequestParam int userId) {
         {
             return registrationService.delete(id, userId);
-
         }
     }
 
-    @GetMapping("/alluser")
-    List<Registration> getallUser(String registration) {
-        return registrationService.allUsers();
+    @GetMapping("/userlist/{id}")
+    public List<Registration> getallUser(@PathVariable("id") int id) {
+        return registrationService.allUsers(id);
     }
 
     @PutMapping("/updateuser/{id}")
-    String updateUserById(@PathVariable("id") int id) {
-        return registrationService.updateUserById(id);
+    public String updateUserById(@PathVariable("id") int id, @RequestBody Registration registration) {
+        return registrationService.updateUserById(id, registration);
     }
 
 }

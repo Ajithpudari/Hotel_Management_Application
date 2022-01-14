@@ -15,7 +15,7 @@ public class RegistrationRepository implements IRegistrationRepository {
     JdbcTemplate jdbcTemplate;
 
 
-    //registraion
+    //registration
     @Override
     public int registration(Registration registration) {
         String query = "INSERT INTO registration VALUES(?,?,?,?,?)";
@@ -23,7 +23,6 @@ public class RegistrationRepository implements IRegistrationRepository {
             return jdbcTemplate.update(query, registration.getId(), registration.getFirstName(), registration.getLastName(),
                     registration.getPhoneNumber(),
                     registration.getRole());
-
         } catch (Exception e) {
             return 0;
         }
@@ -49,7 +48,6 @@ public class RegistrationRepository implements IRegistrationRepository {
         if (deleted == 1)
             return "success";
         return "Failure";
-
     }
 
     // get list of users

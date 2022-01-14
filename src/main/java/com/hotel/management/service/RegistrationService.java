@@ -6,14 +6,15 @@ import java.util.List;
 
 public interface RegistrationService {
 
-    int registration(Registration registration);
+
+    String registration(Registration registration);
 
     Registration getOne(int id);
 
     String delete(int id, int userId);
 
-    List<Registration> allUsers();
+    List<Registration> allUsers(int id);
 
-    String updateUserById(int id);
+    String updateUserById(int id, Registration registration);
 
 }
