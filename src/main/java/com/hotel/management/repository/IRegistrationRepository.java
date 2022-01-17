@@ -2,6 +2,7 @@ package com.hotel.management.repository;
 
 import com.hotel.management.model.Registration;
 
+
 import java.util.List;
 /*public int save(Registration registration);
 public int update(Registration registration);
@@ -13,6 +14,7 @@ public List<Registration> findByRole(String  role);
 public int deleteAll();*/
 
 
+
 public interface IRegistrationRepository {
     int registration(Registration registration);
 
@@ -20,8 +22,10 @@ public interface IRegistrationRepository {
 
     String delete(int id);
 
+
     List<Registration> allUsers();
 
     int updatebyId(Registration registration);
+
 
 }

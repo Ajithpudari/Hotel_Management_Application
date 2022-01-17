@@ -4,13 +4,13 @@ public class Rooms {
 
     private int id;
     private String date;
-    private int roomNo;
+    private String roomNo;
     private String availability;
 
     public Rooms() {
     }
 
-    public Rooms(int id, String date, int roomNo, String availability) {
+    public Rooms(int id, String date, String roomNo, String availability) {
         this.id = id;
         this.date = date;
         this.roomNo = roomNo;
@@ -33,11 +33,11 @@ public class Rooms {
         this.date = date;
     }
 
-    public int getRoomNo() {
+    public String getRoomNo() {
         return roomNo;
     }
 
-    public void setRoomNo(int roomNo) {
+    public void setRoomNo(String roomNo) {
         this.roomNo = roomNo;
     }
 
