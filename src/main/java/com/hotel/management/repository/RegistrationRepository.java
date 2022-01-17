@@ -32,7 +32,8 @@ public class RegistrationRepository implements IRegistrationRepository {
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{id}, new
                     BeanPropertyRowMapper<>(Registration.class));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             return null;
         }
     }
