@@ -25,9 +25,9 @@ public class BookingController {
         return bookingRepo.getRole(name);
     }
 
-    @GetMapping("/user/getallrooms")
+   /* @GetMapping("/user/getallrooms")
     public ResponseEntity<Object> getAllRooms() {
         return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), roomsRepo.getAllRooms()),HttpStatus.OK);
-    }
+    }*/
 }
 

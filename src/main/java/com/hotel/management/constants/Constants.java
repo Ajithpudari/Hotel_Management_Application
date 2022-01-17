@@ -10,8 +10,8 @@ public class Constants {
     public static final String CREATE_REG = "INSERT INTO registration VALUES(?,?,?,?,?)";
 
     public static final String CREATE_ROOMS = "INSERT INTO new_table VALUES(?,?,?,?)";
-    public static final String UPDATE_ROOMS = "UPDATE rooms SET date = ?,roomNo = ?,availability = ? WHERE id = ?";
-    public static final String DELETE_ROOMS = "DELETE FROM rooms WHERE id =?";
-    public static final String SELECT_ROOMS = "SELECT id, date,roomNo,availability FROM rooms";
+    public static final String UPDATE_ROOMS = "UPDATE new_table SET date=?,roomNo=?,availability=? WHERE id=?";
+    public static final String DELETE_ROOMS = "DELETE FROM new_table WHERE id =?";
+    public static final String SELECT_ROOMS = "SELECT id, date,roomNo,availability FROM new_table";
 
 }

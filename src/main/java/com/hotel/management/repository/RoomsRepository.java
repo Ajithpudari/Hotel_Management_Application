@@ -20,21 +20,9 @@ public class RoomsRepository implements IRoomsRepository {
     IRegistrationRepository registrationRepository;
 
     @Override
-    public int rooms(int accessId,Rooms rooms) {
+    public int rooms(Rooms rooms) {
         String query = Constants.CREATE_ROOMS;
-        Registration regAdd = registrationRepository.getOne(accessId);
-
-        if(Objects.equals(regAdd.getRole(),"admin")) {
-            template.update(query,accessId);
-            return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
-        }
-        else {
-            return 0;
-        }
-
-
-
-
+        return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
     }
 
     @Override
@@ -48,23 +36,14 @@ public class RoomsRepository implements IRoomsRepository {
 
         else return new ArrayList<>();
 
-
-
     }
 
 
     @Override
-    public String updateRoomDetails(int accessId,int id, String date, int roomNo, String availability) {
+    public void updateRoomDetails(int id, String date, String roomNo, String availability) {
         String query= "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
-        Registration regUpdate = registrationRepository.getOne(accessId);
-
-        if(Objects.equals(regUpdate.getRole(),"admin")) {
-            template.update(query,id);
-            return "Updated Room " + ": " + roomNo;
-        }
-        else {
-            return "you are not an Admin";
-        }
+        template.update(query,date,roomNo,availability,id);
+        return;
 
     }
 
@@ -84,7 +63,7 @@ public class RoomsRepository implements IRoomsRepository {
     }
 
 
-
+    @Override
     public Rooms getRoomById(int id) {
         String query = "SELECT * FROM new_table WHERE ID=?";
         Rooms room = template.queryForObject(query, new Object[]{id}, new
@@ -94,7 +73,11 @@ public class RoomsRepository implements IRoomsRepository {
     }
 
 
+
+
+
 }
+
 
 
 
@@ -102,6 +85,8 @@ public class RoomsRepository implements IRoomsRepository {
         String query = "INSERT INTO new_table VALUES(?,?,?,?)";
         return template.update(query,id,date, roomNO, availability);
     }*/
+
+/**/
  /* public String delete(int id, int usrId) {
         Registration reg = registrationRepo.getOne(id);
         if (reg == null)
