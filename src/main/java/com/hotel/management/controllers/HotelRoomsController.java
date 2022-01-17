@@ -20,13 +20,13 @@ public class HotelRoomsController{
     @Autowired
     IRoomsRepository roomsRepository;
 
+    //Admin can add room details
     @PostMapping("/admin/add/room_details")
-    public Rooms addRoomDetails(@RequestBody Rooms rooms){
-        roomsRepository.rooms(rooms);
+    public Rooms addRoomDetails(@RequestParam("accessId") int accessId,@RequestBody Rooms rooms){
+        roomsRepository.rooms(accessId,rooms);
         return rooms;
 
     }
-
 
     //Gives list of all Rooms
     @GetMapping("/get_all/room_details")
@@ -34,22 +34,20 @@ public class HotelRoomsController{
         return roomsRepository.getAllRooms(accessId);
     }
 
-    //only Admin can update room details
+    //Admin can update room details
     @PutMapping("/admin/update/room_details")
-    public String updateRoomDetails(@RequestParam("id") int id,String date,String roomNo,String availability)
+    public String updateRoomDetails(@RequestParam("accessId") int accessId,@RequestParam("id") int id,String date,String roomNo,String availability)
     {
-        roomsRepository.updateRoomDetails(id,date,roomNo,availability);
-        return "room updated successfully";
-
+        return roomsRepository.updateRoomDetails(accessId,id,date,roomNo,availability);
     }
 
-    //Only Manager can disable
+    //Manager is able to  disable room usage
     @DeleteMapping("manager/disable/room_details")
     public String deleteRoomDetails(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
         return roomsRepository.deleteRoomDetails(id,accessId);
     }
 
-    //get room by id
+    //Get room by id
     @GetMapping("get/{id}")
     public Rooms getById(@PathVariable("id") int id ){
         return roomsRepository.getRoomById(id);
