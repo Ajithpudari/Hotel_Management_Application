@@ -12,12 +12,13 @@ public interface IRoomsRepository {
     List<Rooms> getAllRooms(int accessId);
 
     //update room in database
-    String updateRoomDetails(int accessId,int id, String date, int roomNo, String availability);
+    void updateRoomDetails(int id, String date, String roomNo, String availability);
 
     //delete room details based on id
     String deleteRoomDetails(int id, int accessId);
+
     //add room details
-    public int rooms(int accessId,Rooms rooms);
+    public int rooms(Rooms rooms);
 
     //get room by id
     public Rooms getRoomById(int id);

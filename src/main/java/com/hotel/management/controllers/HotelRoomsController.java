@@ -21,8 +21,8 @@ public class HotelRoomsController{
     IRoomsRepository roomsRepository;
 
     @PostMapping("/admin/add/room_details")
-    public Rooms addRoomDetails(@RequestParam("accessId") int accessId,@RequestBody Rooms rooms){
-        roomsRepository.rooms(accessId,rooms);
+    public Rooms addRoomDetails(@RequestBody Rooms rooms){
+        roomsRepository.rooms(rooms);
         return rooms;
 
     }
@@ -36,9 +36,10 @@ public class HotelRoomsController{
 
     //only Admin can update room details
     @PutMapping("/admin/update/room_details")
-    public String updateRoomDetails(@RequestParam("accessId") int accessId,@RequestParam("id") int id,@RequestParam("date") String date,@RequestParam("roomNo") int roomNo,@RequestParam("availability") String availability)
+    public String updateRoomDetails(@RequestParam("id") int id,String date,String roomNo,String availability)
     {
-        return roomsRepository.updateRoomDetails(accessId,id,date,roomNo,availability);
+        roomsRepository.updateRoomDetails(id,date,roomNo,availability);
+        return "room updated successfully";
 
     }
 
@@ -48,6 +49,7 @@ public class HotelRoomsController{
         return roomsRepository.deleteRoomDetails(id,accessId);
     }
 
+    //get room by id
     @GetMapping("get/{id}")
     public Rooms getById(@PathVariable("id") int id ){
         return roomsRepository.getRoomById(id);
