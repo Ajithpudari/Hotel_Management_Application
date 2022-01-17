@@ -16,11 +16,7 @@ public class RegistrationRepository implements IRegistrationRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
     @Override
     public int registration(Registration registration) {
         String query = Constants.CREATE_REG;

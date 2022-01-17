@@ -1,65 +1,56 @@
 package com.hotel.management.controllers;
 
+import com.hotel.management.model.AppResponse;
+import com.hotel.management.model.Registration;
 import com.hotel.management.model.Rooms;
 import com.hotel.management.repository.IRoomsRepository;
 import com.hotel.management.repository.RoomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-<<<<<<< HEAD
 @RestController
 @RequestMapping("/hotel")
 public class HotelRoomsController{
-=======
-public class HotelRoomsController {
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 
 
     @Autowired
     IRoomsRepository roomsRepository;
-<<<<<<< HEAD
-    RoomsRepository itemRepo;
+
+    @PostMapping("/admin/add/room_details")
+    public Rooms addRoomDetails(@RequestParam("accessId") int accessId,@RequestBody Rooms rooms){
+        roomsRepository.rooms(accessId,rooms);
+        return rooms;
+
+    }
+
 
     //Gives list of all Rooms
     @GetMapping("/get_all/room_details")
-    public List<Rooms> getAllRooms(){
-=======
-
-    @PutMapping("/admin/updateroom")
-    public String updateRoom(@RequestParam("id") int id, String date, int roomNo, String availability) {
-        roomsRepository.updateRoom(id, date, roomNo, availability);
-        return roomNo + " " + "is updated";
-    }
-
-    @DeleteMapping("/admin/deleteroom")
-    public String deleteRoom(@RequestParam("id") int id) {
-        if (roomsRepository.deleteRoom(id) >= 1) {
-            return "Room Deleted Successfully";
-        } else {
-            return "Something went wrong !";
-        }
-    }
-
-    @GetMapping("getallrooms")
-    public List<Rooms> getAllRooms() {
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
-        return roomsRepository.getAllRooms();
+    public List<Rooms> getAllRooms(@RequestParam("accessId") int accessId){
+        return roomsRepository.getAllRooms(accessId);
     }
 
     //only Admin can update room details
     @PutMapping("/admin/update/room_details")
-    public String updateRoom(@RequestParam("id") int id,String date,int roomNo,String availability)
+    public String updateRoomDetails(@RequestParam("accessId") int accessId,@RequestParam("id") int id,@RequestParam("date") String date,@RequestParam("roomNo") int roomNo,@RequestParam("availability") String availability)
     {
-        roomsRepository.updateRoom(id,date,roomNo,availability);
-        return "roomNo"+" "+roomNo +" "+"is updated";
+        return roomsRepository.updateRoomDetails(accessId,id,date,roomNo,availability);
+
     }
 
     //Only Manager can disable
     @DeleteMapping("manager/disable/room_details")
-    public String delete(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
-       return roomsRepository.deleteRoomDetails(id,accessId);
+    public String deleteRoomDetails(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
+        return roomsRepository.deleteRoomDetails(id,accessId);
+    }
+
+    @GetMapping("get/{id}")
+    public Rooms getById(@PathVariable("id") int id ){
+        return roomsRepository.getRoomById(id);
     }
 
     /*@PutMapping("/update")
@@ -68,7 +59,6 @@ public class HotelRoomsController {
     }*/
 
 
-<<<<<<< HEAD
 
 
 
@@ -76,8 +66,6 @@ public class HotelRoomsController {
     public  String update(@RequestParam("id") int id,@RequestParam ("accessId") int accessId),{
 
     }*/
-=======
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 }
 /* @PostMapping("/admin/addRoom")
 public String addRoom(@RequestParam("id") int id,@RequestParam("date") String date,

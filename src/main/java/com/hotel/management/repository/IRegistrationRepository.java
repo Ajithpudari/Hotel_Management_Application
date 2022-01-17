@@ -14,11 +14,7 @@ public List<Registration> findByRole(String  role);
 public int deleteAll();*/
 
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
 public interface IRegistrationRepository {
     int registration(Registration registration);
 
@@ -26,11 +22,7 @@ public interface IRegistrationRepository {
 
     String delete(int id);
 
-<<<<<<< HEAD
-    //public List<Registration> getall();
 
-=======
->>>>>>> 43680c93fac675818b48204a32df155a1b14ebe8
     List<Registration> allUsers();
 
     int updatebyId(Registration registration);
