@@ -19,19 +19,19 @@ public class HotelRoomsController {
 
 
     @Autowired
-    IRoomsRepository roomsRepository;
-
-    @Autowired
     IRoomsService roomsService;
 
     //Admin can add room details
     @PostMapping("/admin/add")
     public String addRoomDetails(@RequestParam("accessId") int accessId, @RequestBody Rooms rooms) {
-        int i = roomsRepository.rooms(accessId, rooms);
-        if (i == 1) {
-            return "Room details added successfully";
-        } else return "ROOM-ID already exists"+"    "+"Try entering a new id ";
-
+        String i = roomsService.rooms(accessId, rooms);
+        if (i != null) {
+            return "Room Details Added Successfully";
+        }
+        else
+        {
+            return "Room Details Not Added";
+        }
 
     }
 
@@ -50,13 +50,14 @@ public class HotelRoomsController {
     //Manager is able to  disable room usage
     @DeleteMapping("/manager/disable")
     public String deleteRoomDetails(@RequestParam("id") int id, @RequestParam("accessId") int accessId) {
-        return roomsRepository.deleteRoomDetails(id, accessId);
+        return roomsService.deleteRoomDetails(id, accessId);
     }
 
     //Get room by id
-    @GetMapping("get/{id}")
-    public Rooms getById(@PathVariable("id") int id) {
-        return roomsRepository.getRoomById(id);
+    @GetMapping("/get/{id}")
+    public String getById(@PathVariable("id") int id) {
+        roomsService.getRoomById(id);
+        return "Success";
     }
 
 }
