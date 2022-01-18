@@ -21,28 +21,28 @@ public class HotelRoomsController{
     IRoomsRepository roomsRepository;
 
     //Admin can add room details
-    @PostMapping("/admin/add/room_details")
-    public Rooms addRoomDetails(@RequestParam("accessId") int accessId,@RequestBody Rooms rooms){
-        roomsRepository.rooms(accessId,rooms);
-        return rooms;
+    @PostMapping("/admin/add")
+    public int addRoomDetails(@RequestParam("accessId") int accessId,@RequestBody Rooms rooms){
+       return roomsRepository.rooms(accessId,rooms);
+
 
     }
 
     //Gives list of all Rooms
-    @GetMapping("/get_all/room_details")
+    @GetMapping("/getallrooms")
     public List<Rooms> getAllRooms(@RequestParam("accessId") int accessId){
         return roomsRepository.getAllRooms(accessId);
     }
 
     //Admin can update room details
-    @PutMapping("/admin/update/room_details")
+    @PutMapping("/admin/update")
     public String updateRoomDetails(@RequestParam("accessId") int accessId,@RequestParam("id") int id,String date,String roomNo,String availability)
     {
         return roomsRepository.updateRoomDetails(accessId,id,date,roomNo,availability);
     }
 
     //Manager is able to  disable room usage
-    @DeleteMapping("manager/disable/room_details")
+    @DeleteMapping("/manager/disable")
     public String deleteRoomDetails(@RequestParam("id") int id,@RequestParam ("accessId" ) int accessId){
         return roomsRepository.deleteRoomDetails(id,accessId);
     }

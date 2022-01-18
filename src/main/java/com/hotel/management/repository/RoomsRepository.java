@@ -23,10 +23,11 @@ public class RoomsRepository implements IRoomsRepository {
     @Override
     public int rooms(int accessId,Rooms rooms) {
         Registration regAdd = registrationRepository.getOne(accessId);
+
         if(Objects.equals(regAdd.getRole(),"admin"))
         {
-        String query = Constants.CREATE_ROOMS;
-        return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
+            String query = Constants.CREATE_ROOMS;
+            return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
         }
         else return 0;
     }
