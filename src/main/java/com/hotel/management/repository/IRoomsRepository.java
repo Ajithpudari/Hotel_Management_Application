@@ -2,6 +2,7 @@ package com.hotel.management.repository;
 
 import com.hotel.management.model.Rooms;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public interface IRoomsRepository {
@@ -22,6 +23,7 @@ public interface IRoomsRepository {
 
     //get room by id
     public Rooms getRoomById(int id);
+
 
 
 

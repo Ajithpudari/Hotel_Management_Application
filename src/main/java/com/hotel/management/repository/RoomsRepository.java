@@ -4,10 +4,12 @@ import com.hotel.management.model.Registration;
 import com.hotel.management.model.Rooms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,52 +23,44 @@ public class RoomsRepository implements IRoomsRepository {
     IRegistrationRepository registrationRepository;
 
     @Override
-    public int rooms(int accessId,Rooms rooms) {
+    public int rooms(int accessId,Rooms rooms)  {
         Registration regAdd = registrationRepository.getOne(accessId);
 
+        try
+        {
         if(Objects.equals(regAdd.getRole(),"admin"))
         {
             String query = Constants.CREATE_ROOMS;
             return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
         }
-        else return 0;
+        } catch (NullPointerException e) {
+            System.out.println("You are not registered");
+        }
+        return accessId;
     }
+
+
 
     @Override
     public List<Rooms> getAllRooms(int accessId)
     {
-        Registration regGet = registrationRepository.getOne(accessId);
-        if(Objects.equals(regGet.getRole(),"user")||Objects.equals(regGet.getRole(),"admin")||Objects.equals(regGet.getRole(),"manager")){
         List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
                 result.getString("date"), result.getString("roomNo"),result.getString("availability")));
-        return rooms;}
-
-        else return new ArrayList<>();
-
+        return rooms;
     }
 
     @Override
     public String updateRoomDetails(int accessId,int id, String date, String roomNo, String availability) {
-        Registration regUpdate = registrationRepository.getOne(accessId);
-        try {
-            if(Objects.equals(regUpdate.getRole(),"admin")){
-                String query= "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
-                template.update(query,date,roomNo,availability,id);
-                return "Room: "+roomNo+" details updated";
-            }
-            else return "You are not an Admin";
-        } catch (NullPointerException e) {
-            return "You are not registered";
-        }
 
-
-
+        String query= Constants.UPDATE_ROOMS;
+        template.update(query,date,roomNo,availability,id);
+        return "Room: "+roomNo+" details updated";
     }
 
 
     @Override
     public String deleteRoomDetails(int id,int accessId) {
-        String query = "delete from new_table where id =?";
+        String query = Constants.DELETE_ROOMS;
         Registration reg = registrationRepository.getOne(id);
         try {
             if(Objects.equals(reg.getRole(),"manager")){
@@ -87,7 +81,7 @@ public class RoomsRepository implements IRoomsRepository {
 
     @Override
     public Rooms getRoomById(int id) {
-        String query = "SELECT * FROM new_table WHERE ID=?";
+        String query = Constants.SELECT_ROOMS;
         Rooms room = template.queryForObject(query, new Object[]{id}, new
                 BeanPropertyRowMapper<>(Rooms.class));
 
