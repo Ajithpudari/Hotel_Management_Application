@@ -1,20 +1,21 @@
 package com.hotel.management.service;
 
 import com.hotel.management.model.Registration;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface RegistrationService {
 
 
-    String registration(Registration registration);
+    ResponseEntity<Object> registration(Registration registration);
 
-    Registration getOne(int id);
+    ResponseEntity<Object> getOne(int id);
 
-    String delete(int id, int userId);
+    public ResponseEntity<Object> delete(int id, int usrId);
 
-    List<Registration> allUsers(int id);
+    public ResponseEntity<Object> allUsers(int id);
 
-    String updateUserById(int id, Registration registration);
+    public ResponseEntity<Object> updateUserById(int id, Registration registration);
 
 }
