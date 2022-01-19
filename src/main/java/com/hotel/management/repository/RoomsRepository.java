@@ -1,4 +1,5 @@
 package com.hotel.management.repository;
+
 import com.hotel.management.constants.Constants;
 import com.hotel.management.model.Registration;
 import com.hotel.management.model.Rooms;
@@ -21,38 +22,33 @@ public class RoomsRepository implements IRoomsRepository {
     JdbcTemplate template;
 
     @Override
-    public int rooms(int accessId,Rooms rooms)  {
+    public int rooms(int accessId, Rooms rooms) {
 
         String query = Constants.CREATE_ROOMS;
-        return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
+        return template.update(query, rooms.getId(), rooms.getDate(), rooms.getRoomNo(), rooms.getAvailability());
     }
 
-
-
     @Override
-    public List<Rooms> getAllRooms(int accessId)
-    {
+    public List<Rooms> getAllRooms(int accessId) {
         List<Rooms> rooms = template.query("select id, date,roomNo,availability from new_table", (result, rowNum) -> new Rooms(result.getInt("id"),
-                result.getString("date"), result.getString("roomNo"),result.getString("availability")));
+                result.getString("date"), result.getString("roomNo"), result.getString("availability")));
         return rooms;
     }
 
     @Override
-    public String updateRoomDetails(int accessId,int id, String date, String roomNo, String availability) {
+    public String updateRoomDetails(int accessId, int id, String date, String roomNo, String availability) {
 
-        String query= Constants.UPDATE_ROOMS;
-        template.update(query,date,roomNo,availability,id);
-        return "Room: "+roomNo+" details updated";
+        String query = Constants.UPDATE_ROOMS;
+        template.update(query, date, roomNo, availability, id);
+        return "Room: " + roomNo + " details updated";
     }
-
 
     @Override
-    public String deleteRoomDetails(int id,int accessId) {
+    public String deleteRoomDetails(int id, int accessId) {
         String query = Constants.DELETE_ROOMS;
-        template.update(query,accessId);
-        return "Deleted Room Details with id :"+accessId;
+        template.update(query, accessId);
+        return "Deleted Room Details with id :" + accessId;
     }
-
 
     @Override
     public Rooms getRoomById(int id) {
@@ -61,10 +57,6 @@ public class RoomsRepository implements IRoomsRepository {
                 BeanPropertyRowMapper<>(Rooms.class));
         return room;
     }
-
-
-
-
 
 }
 

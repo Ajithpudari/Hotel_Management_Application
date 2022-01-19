@@ -12,7 +12,7 @@ public interface IRoomsService {
 
     String deleteRoomDetails(int id, int accessId);
 
-    String rooms(int accessId, Rooms rooms);
+    int rooms(int accessId, Rooms rooms);
 
     Rooms getRoomById(int id);
 }

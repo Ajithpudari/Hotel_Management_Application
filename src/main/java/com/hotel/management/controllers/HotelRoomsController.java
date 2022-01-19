@@ -24,13 +24,11 @@ public class HotelRoomsController {
     //Admin can add room details
     @PostMapping("/admin/add")
     public String addRoomDetails(@RequestParam("accessId") int accessId, @RequestBody Rooms rooms) {
-        String i = roomsService.rooms(accessId, rooms);
-        if (i != null) {
+        int i = roomsService.rooms(accessId, rooms);
+        if (i == 1) {
             return "Room Details Added Successfully";
-        }
-        else
-        {
-            return "Room Details Not Added";
+        } else {
+            return "Room Details Not added Successfully";
         }
 
     }
@@ -55,9 +53,8 @@ public class HotelRoomsController {
 
     //Get room by id
     @GetMapping("/get/{id}")
-    public String getById(@PathVariable("id") int id) {
-        roomsService.getRoomById(id);
-        return "Success";
+    public Rooms getById(@PathVariable("id") int id) {
+        return roomsService.getRoomById(id);
     }
 
 }

@@ -19,4 +19,6 @@ public class Constants {
     public static final String BOOKED_LIST = "SELECT * FROM booking";
     public static final String BOOKING ="INSERT INTO booking VALUES(?,?,?,?)";
 
+    public static final String USER_NOT ="User Details Not Found";
+
 }
