@@ -10,8 +10,16 @@ public class Constants {
     public static final String CREATE_REG = "INSERT INTO registration VALUES(?,?,?,?,?)";
 
     public static final String CREATE_ROOMS = "INSERT INTO new_table VALUES(?,?,?,?)";
-    public static final String UPDATE_ROOMS = "UPDATE new_table SET date=?,roomNo=?,availability=? WHERE id=?";
-    public static final String DELETE_ROOMS = "DELETE FROM new_table WHERE id =?";
-    public static final String SELECT_ROOMS = "SELECT id, date,roomNo,availability FROM new_table";
+    public static final String UPDATE_ROOMS = "update new_table set date = ?,roomNo = ?,availability = ? where id = ?";
+    public static final String DELETE_ROOMS = "delete from new_table where id =?";
+    public static final String SELECT_ROOMS = "SELECT * FROM new_table WHERE ID=?";
+
+
+    public static final String ADD_BOOK = "UPDATE rooms SET date = ? ,availability = ? WHERE id = ?";
+    public static final String BOOKED_LIST = "SELECT * FROM booking";
+    public static final String BOOKING ="INSERT INTO booking VALUES(?,?,?,?)";
+    public static final String CANCEL_BOOK =" DELETE FROM BOOKING WHERE bId = ?";
+
+    public static final String USER_NOT ="User Details Not Found";
 
 }
