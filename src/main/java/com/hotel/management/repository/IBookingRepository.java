@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IBookingRepository
 {
-    public int addBooking(Booking booking);
+    public String addBooking(Booking booking);
     List<Booking> bookedList(int userId);
-
+    public String  cancelBooking(Booking booking);
 }

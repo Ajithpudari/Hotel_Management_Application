@@ -34,6 +34,15 @@ public class BookingController {
     }
 
 
+    @DeleteMapping("/cancelBooking")
+    public String cancelBooking(@RequestParam("userId") int userId, @RequestParam("roomId") int roomId,@RequestParam("bId") int bId) {
+        return iBookingService.cancelBooking(userId,roomId,bId);
+
+    }
+
+
+
+
    /* @GetMapping("/user/getallrooms")
     public ResponseEntity<Object> getAllRooms() {
         return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), roomsRepo.getAllRooms()),HttpStatus.OK);
