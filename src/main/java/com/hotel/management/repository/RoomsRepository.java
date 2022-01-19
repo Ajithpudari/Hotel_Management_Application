@@ -19,24 +19,12 @@ public class RoomsRepository implements IRoomsRepository {
 
     @Autowired
     JdbcTemplate template;
-    @Autowired
-    IRegistrationRepository registrationRepository;
 
     @Override
     public int rooms(int accessId,Rooms rooms)  {
-        Registration regAdd = registrationRepository.getOne(accessId);
 
-        try
-        {
-        if(Objects.equals(regAdd.getRole(),"admin"))
-        {
-            String query = Constants.CREATE_ROOMS;
-            return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
-        }
-        } catch (NullPointerException e) {
-            System.out.println("You are not registered");
-        }
-        return accessId;
+        String query = Constants.CREATE_ROOMS;
+        return template.update(query,rooms.getId(),rooms.getDate(),rooms.getRoomNo(),rooms.getAvailability());
     }
 
 
@@ -61,21 +49,8 @@ public class RoomsRepository implements IRoomsRepository {
     @Override
     public String deleteRoomDetails(int id,int accessId) {
         String query = Constants.DELETE_ROOMS;
-        Registration reg = registrationRepository.getOne(id);
-        try {
-            if(Objects.equals(reg.getRole(),"manager")){
-            template.update(query,accessId);
-            return "Deleted Room Details with id :"+accessId;
-        }
-        else{
-            return "You  are not the Manager";
-        }
-        }
-        catch (NullPointerException e)
-        {
-            return "You are not registered";
-        }
-
+        template.update(query,accessId);
+        return "Deleted Room Details with id :"+accessId;
     }
 
 
@@ -84,7 +59,6 @@ public class RoomsRepository implements IRoomsRepository {
         String query = Constants.SELECT_ROOMS;
         Rooms room = template.queryForObject(query, new Object[]{id}, new
                 BeanPropertyRowMapper<>(Rooms.class));
-
         return room;
     }
 
