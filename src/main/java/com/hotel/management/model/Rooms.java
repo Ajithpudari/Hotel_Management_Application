@@ -45,7 +45,8 @@ public class Rooms {
         return availability;
     }
 
-    public void setAvailability(String availability) {
+    public String setAvailability(String availability) {
         this.availability = availability;
+        return availability;
     }
 }

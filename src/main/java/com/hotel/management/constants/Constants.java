@@ -18,5 +18,6 @@ public class Constants {
     public static final String ADD_BOOK = "UPDATE rooms SET date = ? ,availability = ? WHERE id = ?";
     public static final String BOOKED_LIST = "SELECT * FROM booking";
     public static final String BOOKING ="INSERT INTO booking VALUES(?,?,?,?)";
+    public static final String CANCEL_BOOK =" DELETE FROM BOOKING WHERE bId = ?";
 
 }

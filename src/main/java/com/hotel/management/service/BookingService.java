@@ -9,7 +9,6 @@ import com.hotel.management.repository.RoomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,22 +35,52 @@ public class BookingService implements IBookingService {
 
         if (Objects.equals(reg1.getRole(), "user") && Objects.equals(room.getAvailability(), "Yes")) {
             Booking booking1 = new Booking(userId, userId, room.getDate(), roomId);
-            bookingRepository.book(booking1);
+            int isBooking = bookingRepository.book(booking1);
+            if (isBooking == 1) {
+                iRoomsRepository.updateRoomDetails(userId, roomId, room.getDate(), room.getRoomNo(), "No");
+
+            }
             return "Room Booked";
 
-        }
+        }else
         return "Room Not Booked";
     }
 
     @Override
     public List<Booking> bookedList(int userId) {
 
-        Registration registration=iRegistrationRepository.getOne(userId);
+        Registration registration = iRegistrationRepository.getOne(userId);
+        Booking booking1 = bookingRepository.bookedList().get(userId);
 
-            return bookingRepository.bookedList();
+        return bookingRepository.bookedList();
 
     }
+
+
+    @Override
+    public String cancelBooking(int userId, int roomId, int bId)
+    {
+        Registration regC = iRegistrationRepository.getOne(userId);
+        Rooms roomC = iRoomsRepository.getRoomById(roomId);
+        Booking bk = bookingRepository.bookedList().get(userId);
+        if(Objects.equals(regC.getRole(),"user") && Objects.equals(roomC.getAvailability(),"No"))
+        {
+
+                bookingRepository.deleteBooking(bId);
+            iRoomsRepository.updateRoomDetails(userId,roomId,roomC.getDate(),roomC.getRoomNo(),"Yes");
+        }
+
+        return "Success";
+    }
+
+    @Override
+    public int deleteBooking ( int bId){
+        return bookingRepository.deleteBooking(bId);
+    }
 }
+
+
+
 
 /*
 
