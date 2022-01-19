@@ -1,5 +1,6 @@
 package com.hotel.management.repository;
 
+import com.hotel.management.Exception.NotFoundException;
 import com.hotel.management.constants.Constants;
 import com.hotel.management.model.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class RegistrationRepository implements IRegistrationRepository {
         try {
             return jdbcTemplate.update(query, registration.getId(), registration.getFirstName(), registration.getLastName(), registration.getPhoneNumber(), registration.getRole());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return 0;
         }
     }
@@ -33,9 +35,10 @@ public class RegistrationRepository implements IRegistrationRepository {
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{id}, new
                     BeanPropertyRowMapper<>(Registration.class));
-        }
-        catch (Exception e) {
-            return null;
+
+        } catch (Exception e) {
+
+          return null;
         }
     }
 

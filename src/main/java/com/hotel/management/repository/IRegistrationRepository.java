@@ -14,7 +14,6 @@ public List<Registration> findByRole(String  role);
 public int deleteAll();*/
 
 
-
 public interface IRegistrationRepository {
     int registration(Registration registration);
 

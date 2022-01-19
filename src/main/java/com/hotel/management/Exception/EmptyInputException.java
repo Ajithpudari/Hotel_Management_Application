@@ -1,11 +1,8 @@
 package com.hotel.management.Exception;
 
-import org.springframework.stereotype.Component;
+public class EmptyInputException extends RuntimeException{
 
-@Component
-public class ControllerException extends RuntimeException {
-
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionID = 1l;
     private String errorCode;
     private String errorMessage;
 
@@ -24,16 +21,15 @@ public class ControllerException extends RuntimeException {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
-    public ControllerException(String errorCode, String errorMessage){
+    public  static long getSerialVersionID(){
+        return serialVersionID;
+    }
+    public EmptyInputException(String errorCode, String errorMessage){
         super();
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+    }
+    public EmptyInputException(){
 
     }
-    public ControllerException(){
-
-    }
-
-
 }

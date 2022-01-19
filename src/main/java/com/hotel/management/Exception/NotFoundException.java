@@ -1,11 +1,12 @@
 package com.hotel.management.Exception;
 
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
-import org.springframework.stereotype.Component;
 
-@Component
-public class BusinessException extends RuntimeException{
-    private static final long serialVersionUID = 1L;
+public class NotFoundException extends RuntimeException{
+
+
+    private static final long serialVersionID = 1l;
     private String errorCode;
     private String errorMessage;
 
@@ -24,15 +25,17 @@ public class BusinessException extends RuntimeException{
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
-    public BusinessException(String errorCode, String errorMessage){
+    public  static long getSerialVersionID(){
+        return serialVersionID;
+    }
+    public NotFoundException(String errorCode, String errorMessage){
         super();
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
+    }
+    public NotFoundException(){
 
     }
-    public BusinessException(){
 
-    }
 
 }
