@@ -1,3 +1,8 @@
 spring:
   profiles:
-    active: sai
+    active: ajith
+
+springdoc:
+  swagger-ui:
+    path: /hotel-api.html
+    disable-swagger-defalut-url: true
