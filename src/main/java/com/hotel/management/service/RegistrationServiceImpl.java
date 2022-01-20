@@ -1,7 +1,7 @@
 package com.hotel.management.service;
 
 import com.hotel.management.Exception.EmptyInputException;
-import com.hotel.management.Exception.EntityExistsException;
+import com.hotel.management.Exception.EntityExistsException1;
 import com.hotel.management.Exception.EntityNotExistsException;
 import com.hotel.management.Exception.NotFoundException;
 import com.hotel.management.model.AppResponse;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -39,10 +38,10 @@ public class RegistrationServiceImpl implements RegistrationService {
                    return new ResponseEntity<>(new AppResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), false, "Not registered because Internal"), HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             } else {
-                throw new EntityExistsException("400","User already available");
+                throw new EntityExistsException1(HttpStatus.BAD_REQUEST.value(), "Already Registered");
             }
         }
-        throw new EmptyInputException("400", "provide a proper name");
+        throw new EmptyInputException(HttpStatus.BAD_REQUEST.value() , "provide a proper name");
     }
 
 
@@ -54,7 +53,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             if (registration != null)
                 return new ResponseEntity<>(new AppResponse(HttpStatus.OK.value(), "Success"), HttpStatus.OK);
             else
-                throw new NotFoundException("404","User Not Found");
+                throw new NotFoundException(HttpStatus.NOT_FOUND.value(),"User Not Found");
 
     }
     //}
@@ -64,7 +63,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
             Registration reg = registrationRepo.getOne(id);
             if (reg == null)
-                throw  new NotFoundException("404" , "User Not Found");
+                throw  new NotFoundException(HttpStatus.NOT_FOUND.value(), "User Not Found");
 
             if (Objects.equals(reg.getRole(), "admin") || Objects.equals(reg.getRole(), "manager")) {
                 registrationRepo.delete(usrId);
@@ -99,9 +98,8 @@ public class RegistrationServiceImpl implements RegistrationService {
                 return new ResponseEntity<>(new AppResponse(HttpStatus.BAD_REQUEST.value(), "user not updated"), HttpStatus.BAD_REQUEST);
             }
          else {
-           throw new NotFoundException("404", "you are not Authorised" );
+           throw new NotFoundException(HttpStatus.FORBIDDEN.value() , "you are not Authorised" );
         }
-        // return new ResponseEntity<>(new AppResponse(HttpStatus.NOT_FOUND.value(), "Cannot find user with id=" + id), HttpStatus.NOT_FOUND);
-    }throw new EntityNotExistsException("422", "Entity Not found in db");
+    }throw new EntityNotExistsException(HttpStatus.NOT_FOUND.value(), "Entity Not found in db");
 
 } }

@@ -1,9 +1,10 @@
 package com.hotel.management.advice;
 
 import com.hotel.management.Exception.EmptyInputException;
-import com.hotel.management.Exception.EntityExistsException;
+import com.hotel.management.Exception.EntityExistsException1;
 import com.hotel.management.Exception.EntityNotExistsException;
 import com.hotel.management.Exception.NotFoundException;
+import com.hotel.management.model.AppResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,25 +14,28 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class MyControllerAdvice extends RuntimeException {
 
     @ExceptionHandler(EmptyInputException.class)
-    public ResponseEntity<String> handleEmptyInput(EmptyInputException emptyInputException) {
-        return new ResponseEntity<String>("Error Code = " + emptyInputException.getErrorCode()
-                + ", Error Message = " + emptyInputException.getErrorMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> handleEmptyInput(EmptyInputException emptyInputException) {
+        AppResponse appResponse = new AppResponse(HttpStatus.BAD_REQUEST.value(), false, emptyInputException.getErrorMessage());
+        return new ResponseEntity<Object>(appResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleNotFoundException(NotFoundException notFoundException) {
-        return new ResponseEntity<String>("Error Code = " + notFoundException.getErrorCode()
-                + ", Error Message = " + notFoundException.getErrorMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> handleNotFoundException(NotFoundException notFoundException) {
+        AppResponse appResponse = new AppResponse(HttpStatus.NOT_FOUND.value(), false, notFoundException.getErrorMessage());
+        return new ResponseEntity<Object>(appResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EntityExistsException1.class)
+    public ResponseEntity<Object> entityExistsException(EntityExistsException1 entityExistsException1) {
+        AppResponse appResponse = new AppResponse(HttpStatus.BAD_REQUEST.value(), false, entityExistsException1.getErrorMessage());
+        return new ResponseEntity<Object>(appResponse, HttpStatus.BAD_REQUEST);
 
     }
-    @ExceptionHandler(EntityExistsException.class)
-    public ResponseEntity<String> entityExistsException(com.hotel.management.Exception.EntityExistsException entityExistsException) {
-        return new ResponseEntity<String>("Error Code = " + entityExistsException.getErrorCode()
-                + ", Error Message = " + entityExistsException.getMessage(), HttpStatus.BAD_REQUEST);
 
-}
     @ExceptionHandler(EntityNotExistsException.class)
-    public ResponseEntity<String> entityNotExistsException(com.hotel.management.Exception.EntityNotExistsException entityNotExistsException) {
-        return new ResponseEntity<String>("Error Code = " + entityNotExistsException.getErrorCode()
-                + ", Error Message = " + entityNotExistsException.getMessage(), HttpStatus.BAD_REQUEST);
-}}
+    public ResponseEntity<Object> entityNotExistsException(EntityNotExistsException entityNotExistsException) {
+        AppResponse appResponse = new AppResponse(HttpStatus.BAD_REQUEST.value(), false, entityNotExistsException.getErrorMessage());
+        return new ResponseEntity<Object>(appResponse, HttpStatus.BAD_REQUEST);
+
+    }
+}

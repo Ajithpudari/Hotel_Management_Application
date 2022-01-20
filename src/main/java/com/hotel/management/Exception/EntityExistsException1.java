@@ -1,16 +1,22 @@
 package com.hotel.management.Exception;
 
-public class EmptyInputException extends RuntimeException{
+
+public class EntityExistsException1 extends RuntimeException {
+
 
     private static final long serialVersionID = 1l;
-    private Integer errorCode;
+    private int errorCode;
     private String errorMessage;
 
-    public Integer getErrorCode() {
+    public EntityExistsException1() {
+        super();
+    }
+
+    public int getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(Integer errorCode) {
+    public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
     }
 
@@ -21,15 +27,9 @@ public class EmptyInputException extends RuntimeException{
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-    public  static long getSerialVersionID(){
-        return serialVersionID;
-    }
-    public EmptyInputException(Integer errorCode, String errorMessage){
-        super();
+
+    public EntityExistsException1(int errorCode, String errorMessage) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
-    }
-    public EmptyInputException(){
-
     }
 }

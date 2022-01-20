@@ -5,15 +5,15 @@ public class EntityNotExistsException extends RuntimeException {
 
 
     private static final long serialVersionID = 1l;
-    private String errorCode;
+    private int errorCode;
     private String errorMessage;
 
 
-    public String getErrorCode() {
+    public Integer getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
+    public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
 
@@ -22,7 +22,7 @@ public class EntityNotExistsException extends RuntimeException {
     }
 
 
-    public EntityNotExistsException(String errorCode, String errorMessage) {
+    public EntityNotExistsException(Integer errorCode, String errorMessage) {
         this.errorMessage = errorMessage;
         this.errorCode = errorCode;
     }

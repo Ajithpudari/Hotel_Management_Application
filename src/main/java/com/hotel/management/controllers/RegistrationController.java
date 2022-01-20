@@ -13,8 +13,10 @@ public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
 
-    @PostMapping("/register")
 
+
+
+    @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Registration registration) {
         return registrationService.registration(registration);
     }

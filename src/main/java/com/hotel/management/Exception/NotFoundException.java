@@ -7,14 +7,14 @@ public class NotFoundException extends RuntimeException{
 
 
     private static final long serialVersionID = 1l;
-    private String errorCode;
+    private Integer errorCode;
     private String errorMessage;
 
-    public String getErrorCode() {
+    public Integer getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
+    public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
     }
 
@@ -28,7 +28,7 @@ public class NotFoundException extends RuntimeException{
     public  static long getSerialVersionID(){
         return serialVersionID;
     }
-    public NotFoundException(String errorCode, String errorMessage){
+    public NotFoundException(Integer errorCode, String errorMessage){
         super();
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
